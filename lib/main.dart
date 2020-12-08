@@ -13,6 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  CustomRouterDelegate _routerDelegate = CustomRouterDelegate();
+  CustomRouterParser _routeInformationParser = CustomRouterParser();
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -20,8 +22,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routerDelegate: CustomRouterDelegate(),
-      routeInformationParser: CustomRouterParser(),
+      routerDelegate: _routerDelegate,
+      routeInformationParser: _routeInformationParser,
     );
   }
 }

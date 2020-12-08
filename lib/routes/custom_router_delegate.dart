@@ -9,6 +9,7 @@ class CustomRouterDelegate extends RouterDelegate<CustomRoutePath>
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      key: navigatorKey,
       onPopPage: (route, result) {
         if (!route.didPop(result)) return false;
         _selected = null;
