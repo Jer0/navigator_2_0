@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_2_0/routes/custom_router_delegate.dart';
+import 'package:navigator_2_0/routes/custom_router_parser.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,40 +13,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _selected;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Navigator(
-        onPopPage: (route, result) {
-          if (!route.didPop(result)) return false;
-          setState(() {
-            _selected = null;
-          });
-          return true;
-        },
-        pages: [
-          MaterialPage(
-            child: ListPage(
-              onTap: (selected) {
-                setState(() {
-                  _selected = selected;
-                });
-              },
-            ),
-          ),
-          if (_selected != null)
-            MaterialPage(
-              child: DetailsPage(
-                selected: _selected,
-              ),
-            ),
-        ],
-      ),
+      routerDelegate: CustomRouterDelegate(),
+      routeInformationParser: CustomRouterParser(),
     );
   }
 }
