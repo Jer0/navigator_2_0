@@ -11,7 +11,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _selected;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,32 +18,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Navigator(
-        onPopPage: (route, result) {
-          if (!route.didPop(result)) return false;
-          setState(() {
-            _selected = null;
-          });
-          return true;
-        },
-        pages: [
-          MaterialPage(
-            child: ListPage(
-              onTap: (selected) {
-                setState(() {
-                  _selected = selected;
-                });
-              },
-            ),
-          ),
-          if (_selected != null)
-            MaterialPage(
-              child: DetailsPage(
-                selected: _selected,
-              ),
-            ),
-        ],
-      ),
+      home: ListPage(),
     );
   }
 }
@@ -52,10 +26,7 @@ class _MyAppState extends State<MyApp> {
 class ListPage extends StatelessWidget {
   const ListPage({
     Key key,
-    @required this.onTap,
   }) : super(key: key);
-
-  final Function(String) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +36,9 @@ class ListPage extends StatelessWidget {
           final item = "Elemento $index";
           return ListTile(
             title: Text(item),
-            onTap: () => onTap(item),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => DetailsPage(selected: item),
+            )),
           );
         },
         itemCount: 10,
