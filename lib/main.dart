@@ -65,9 +65,6 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(selected),
       ),
-      body: Container(
-        child: Text("Pag 2"),
-      ),
     );
   }
 }
